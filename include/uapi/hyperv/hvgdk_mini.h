@@ -721,6 +721,23 @@ struct hv_vp_assist_page {
 	__u8 vtl_ret_actions[256];
 } __packed;
 
+/*
+ * Hyper-V uses the software reserved 32 bytes in VMCB control area to expose
+ * SVM enlightenments to guests.
+ */
+struct hv_vmcb_enlightenments {
+	struct __packed hv_enlightenments_control {
+		__u32 nested_flush_hypercall:1;
+		__u32 msr_bitmap:1;
+		__u32 enlightened_npt_tlb: 1;
+		__u32 reserved:29;
+	} __packed hv_enlightenments_control;
+	__u32 hv_vp_id;
+	__u64 hv_vm_id;
+	__u64 partition_assist_page;
+	__u64 reserved;
+} __packed;
+
 enum hv_register_name {
 
 	/* Synthetic VSM registers */

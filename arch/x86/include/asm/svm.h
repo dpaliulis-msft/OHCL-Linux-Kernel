@@ -5,7 +5,7 @@
 #include <uapi/asm/svm.h>
 #include <uapi/asm/kvm.h>
 
-#include <asm/hyperv-tlfs.h>
+#include <asm-generic/hyperv-defs.h>
 
 /*
  * 32-bit intercept words in the VMCB Control Area, starting
@@ -183,6 +183,9 @@ struct __attribute__ ((__packed__)) vmcb_control_area {
 #define V_GIF_SHIFT 9
 #define V_GIF_MASK (1 << V_GIF_SHIFT)
 
+#define V_INT_SHADOW_SHIFT 10
+#define V_INT_SHADOW_MASK (1 << V_INT_SHADOW_SHIFT)
+
 #define V_NMI_PENDING_SHIFT 11
 #define V_NMI_PENDING_MASK (1 << V_NMI_PENDING_SHIFT)
 
@@ -194,6 +197,9 @@ struct __attribute__ ((__packed__)) vmcb_control_area {
 
 #define V_IGN_TPR_SHIFT 20
 #define V_IGN_TPR_MASK (1 << V_IGN_TPR_SHIFT)
+
+#define V_GUEST_BUSY_SHIFT 63
+#define V_GUEST_BUSY_MASK (1ULL << V_GUEST_BUSY_SHIFT)
 
 #define V_IRQ_INJECTION_BITS_MASK (V_IRQ_MASK | V_INTR_PRIO_MASK | V_IGN_TPR_MASK)
 
